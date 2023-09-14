@@ -73,7 +73,6 @@ function checkAnswer(currentLevel) {
 
         $("#level-title").text("Game Over, Press Any Key or Tap Anywhere to Restart");
         
-        startOver();
     }
     
 }
