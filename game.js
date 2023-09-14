@@ -15,13 +15,17 @@ $(document).keypress(function () {
 });
 
 function startGame () {
-    $("start-game").off("touchstart", startGame);
-    nextSequence();
+    if (!started) {
+        started = true; 
+        $("#start-game").off("touchstart", startGame);
+        nextSequence();
+    }
 }
 
 $("#start-game").on("touchstart", startGame);
 
 $(".btn").click(function () {
+    if (started) {
     var userChosenColour = $(this).attr("id");
 
     userClickedPattern.push(userChosenColour);
@@ -30,6 +34,7 @@ $(".btn").click(function () {
     animatePress(userChosenColour);
 
     checkAnswer(userClickedPattern.length-1);
+    }
 
 });
 
