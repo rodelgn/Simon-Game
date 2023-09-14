@@ -114,5 +114,5 @@ function startOver() {
     level = 0;
     gamePattern = [];
     started = false;
-    $('#level-title').text("Press A key to start");
+    $('#level-title').text("Press A key or Tap Anywhere to start");
 }
