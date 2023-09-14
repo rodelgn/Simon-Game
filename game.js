@@ -38,6 +38,20 @@ $(".btn").click(function () {
 
 });
 
+$("body").on("touchstart", function () {
+    if (!started) {
+        startOver();
+        $("body").off("touchstart");
+    }
+});
+
+$(document).keypress(function (event) {
+    if (!started) {
+        startOver();
+        $(document).off("keypress");
+    }
+});
+
 
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
@@ -57,7 +71,7 @@ function checkAnswer(currentLevel) {
             $("body").removeClass("game-over");
         }, 200);
 
-        $("#level-title").text("Game Over, Press Any Key to Restart");
+        $("#level-title").text("Game Over, Press Any Key or Tap Anywhere to Restart");
         
         startOver();
     }
@@ -69,7 +83,7 @@ function nextSequence() {
     userClickedPattern = [];
 
     level++
-    $("#level-title").text("level " + level);
+    $("#level-title").text("Level " + level);
 
     var randomNumber = Math.floor(Math.random() * 4);
     var randomChosenColour = buttonColours[randomNumber];
