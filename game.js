@@ -56,16 +56,18 @@ function checkAnswer(currentLevel) {
             $("body").removeClass("game-over");
         }, 200);
 
-        $("#level-title").text("Game Over, Press Any Key or Tap Anywhere to Restart");
+        $("#level-title").text("Game Over");
         
-        startOver();
+        $("#restart-button").show();
 
-        $("document").on("touchstart", function () {
-            if (!started) {
-                startOver();
-                $("document").off("touchstart");
-            }
+        
+        $("#restart-button").on("click", function () {
+            startOver();
+            
+            $("#restart-button").hide();
         });
+
+        
     }
     
 }
@@ -104,4 +106,5 @@ function startOver() {
     level = 0;
     gamePattern = [];
     started = false;
+    $('#level-title').text("Press A key to start");
 }
