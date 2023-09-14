@@ -59,16 +59,18 @@ function checkAnswer(currentLevel) {
         $("#level-title").text("Game Over, Press Any Key or Tap Anywhere to Restart");
         
         startOver();
+
+        $("start-game").on("touchstart", function () {
+            if (!started) {
+                startOver();
+                $("start-game").off("touchstart");
+            }
+        });
     }
     
 }
 
-$("body").on("touchstart", function () {
-    if (!started) {
-        startOver();
-        $("body").off("touchstart");
-    }
-});
+
 
 function nextSequence() {
 
