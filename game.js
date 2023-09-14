@@ -14,6 +14,13 @@ $(document).keypress(function () {
     }
 });
 
+function startGame () {
+    $("start-game").off("touchstart", startGame);
+    nextSequence();
+}
+
+$("#start-game").on("touchstart", startGame);
+
 $(".btn").click(function () {
     var userChosenColour = $(this).attr("id");
 
@@ -25,6 +32,7 @@ $(".btn").click(function () {
     checkAnswer(userClickedPattern.length-1);
 
 });
+
 
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
