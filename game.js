@@ -60,16 +60,15 @@ function checkAnswer(currentLevel) {
         
         startOver();
 
-        $("start-game").on("touchstart", function () {
+        $("document").on("touchstart", function () {
             if (!started) {
                 startOver();
-                $("start-game").off("touchstart");
+                $("document").off("touchstart");
             }
         });
     }
     
 }
-
 
 
 function nextSequence() {
