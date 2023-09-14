@@ -17,12 +17,20 @@ $(document).keypress(function () {
 function startGame() {
     if (!started) {
         started = true; 
-        $("#start-game").off("touchstart", startGame); // Remove the event listener
+        $("#start-game").off("touchstart", startGame);
         nextSequence();
     }
 }
 
 $("#start-game").on("touchstart", startGame);
+
+$(document).on("touchstart", function () {
+    if (!started) {
+        $("#level-title").text("Level " + level);
+        nextSequence();
+        started = true;
+    }
+});
 
 $(".btn").click(function () {
     if (started) {
