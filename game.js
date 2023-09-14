@@ -16,7 +16,7 @@ $(document).keypress(function () {
 
 function startGame() {
     if (!started) {
-        started = true; // Set started to true to indicate that the game has started
+        started = true; 
         $("#start-game").off("touchstart", startGame); // Remove the event listener
         nextSequence();
     }
@@ -59,10 +59,16 @@ function checkAnswer(currentLevel) {
         $("#level-title").text("Game Over, Press Any Key or Tap Anywhere to Restart");
         
         startOver();
-        startGame();
     }
     
 }
+
+$("body").on("touchstart", function () {
+    if (!started) {
+        startOver();
+        $("body").off("touchstart");
+    }
+});
 
 function nextSequence() {
 
