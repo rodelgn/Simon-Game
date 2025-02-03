@@ -1,68 +1,135 @@
+:root {
+  --primary-color: #011F3F;
+  --accent-color: #FEF2BF;
+  --danger-color: #e74c3c;
+  --success-color: #4CAF50;
+  --button-size: min(25vw, 200px);
+}
+
 body {
   text-align: center;
-  background-color: #011F3F;
+  background-color: var(--primary-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
 }
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  margin:  5%;
-  color: #FEF2BF;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  margin: 2rem 0;
+  color: var(--accent-color);
+  line-height: 1.3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .container {
-  display: block;
-  width: 50%;
-  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
 .btn {
-  margin: 25px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 10px solid black;
-  border-radius: 20%;
+  aspect-ratio: 1;
+  border: 8px solid rgba(0, 0, 0, 0.15);
+  border-radius: 25%;
+  cursor: pointer;
+  transition: 
+    transform 0.1s ease,
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
+  margin: 0.5rem;
+  width: var(--button-size);
+  justify-self: center;
 }
+.btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Color variations */
+.red { background-color: #8B0000; }    /* Dark Red */
+.green { background-color: #006400; } /* Dark Green */
+.blue { background-color: #00008B; }  /* Dark Blue */
+.yellow { background-color: #CCCC00; }
 
 .game-over {
-  background-color: red;
-  opacity: 0.8;
-}
-
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.yellow {
-  background-color: yellow;
+  background-color: var(--danger-color);
+  animation: gameOverFlash 1s ease infinite;
 }
 
 .pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
+  transform: scale(0.95);
+  box-shadow: 
+    0 0 25px rgba(255, 255, 255, 0.8),
+    inset 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 #restart-button {
-  display: none;
-  border: 2px solid;
-  border-radius: 11px;
-  padding: 15px 32px;
-  background-color:  #4CAF50;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  background-color: var(--success-color);
   color: white;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: 
+    transform 0.2s ease,
+    background-color 0.3s ease;
+  display: none;
 }
 
 #restart-button:hover {
-  color: black;
+  background-color: #44a047;
+  transform: translateX(-50%) scale(1.05);
+}
+
+@keyframes gameOverFlash {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.95; }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .btn {
+    border-width: 6px;
+    width: min(40vw, 150px);
+  }
+
+  #restart-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #level-title {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+
+  .btn {
+    width: min(45vw, 130px);
+    border-width: 4px;
+  }
+
+  .pressed {
+    transform: scale(0.9);
+  }
 }
